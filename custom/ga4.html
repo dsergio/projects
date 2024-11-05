@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GA4/GTM Demo - David Sergio</title>
+	<link rel = "stylesheet" type = "text/css" href = "./styles.css" />
+
+	<script>
+		window.dataLayer = window.dataLayer || [];
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T8VHDLFL');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+
+</script>
+
+<script>
+
+	function setoutput(obj) {
+		var output = {};
+		output.event = obj.event;
+		output.requirement_name = obj.requirement_name;
+
+
+		var output_text = "dataLayer.push(";
+		output_text += JSON.stringify(output, undefined, 2);
+		output_text += "\n\ndataLayer = ";
+		output_text += JSON.stringify(dataLayer, undefined, 2);
+		output_text += ");"
+
+		jQuery("#requirement_name").html(obj.requirement_name);
+		jQuery("#requirement_json").text(output_text);
+	}
+
+	jQuery(document).ready(function() {
+
+		// set page-level events and dimensions
+		//
+		var event_obj = {
+			"user_type": "paid",
+			"page_name": "ga4 gtm demo",
+			"requirement_name": "page_view"
+		};
+		dataLayer.push(event_obj);
+		dataLayer.push({'event': 'page_view'});
+		setoutput(event_obj);
+
+
+		// display information about event:
+		//
+		jQuery("button.btn-primary").on("click", function() {
+			var name = jQuery(this).closest("tr").find(".requirement_name").text();
+			var event_obj = {
+				'event': 'get_requirement_info',
+				'requirement_name': name,
+			};
+			setoutput(event_obj);
+
+			console.log("obj: ", event_obj);
+		});
+
+
+		// fire event
+		// 
+		jQuery("button.btn-success").on("click", function() {
+
+			var name = jQuery(this).closest("tr").find(".requirement_name").text();
+
+			var event_obj = {
+				'event': name,
+				'requirement_name': name,
+			};
+
+			if (name == 'purchase') {
+
+				dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+				dataLayer.push({
+					event: "purchase",
+					ecommerce: {
+						transaction_id: "T_12345",
+				// Sum of (price * quantity) for all items.
+						value: 72.05,
+						tax: 3.60,
+						shipping: 5.99,
+						currency: "USD",
+						coupon: "SUMMER_SALE",
+						items: [
+						{
+							item_id: "SKU_12345",
+							item_name: "Stan and Friends Tee",
+							affiliation: "Google Merchandise Store",
+							coupon: "SUMMER_FUN",
+							discount: 2.22,
+							index: 0,
+							item_brand: "Google",
+							item_category: "Apparel",
+							item_category2: "Adult",
+							item_category3: "Shirts",
+							item_category4: "Crew",
+							item_category5: "Short sleeve",
+							item_list_id: "related_products",
+							item_list_name: "Related Products",
+							item_variant: "green",
+							location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+							price: 10.01,
+							quantity: 3
+						},
+						{
+							item_id: "SKU_12346",
+							item_name: "Google Grey Women's Tee",
+							affiliation: "Google Merchandise Store",
+							coupon: "SUMMER_FUN",
+							discount: 3.33,
+							index: 1,
+							item_brand: "Google",
+							item_category: "Apparel",
+							item_category2: "Adult",
+							item_category3: "Shirts",
+							item_category4: "Crew",
+							item_category5: "Short sleeve",
+							item_list_id: "related_products",
+							item_list_name: "Related Products",
+							item_variant: "gray",
+							location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+							price: 21.01,
+							promotion_id: "P_12345",
+							promotion_name: "Summer Sale",
+							quantity: 2
+						}]
+					}
+				});
+			}
+
+			setoutput(event_obj);
+
+			console.log("obj: ", event_obj);
+			dataLayer.push(event_obj);
+		});
+
+	});
+</script>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8VHDLFL"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<div class="jumbotron">
+			<h1 class="display-3"><a href = "/portfolio/site/ga4.html">GA4/GTM Demo</a></h1>
+
+		</div>
+
+		<div class="container-fluid">
+
+			<div class="row">
+			<div class="col-md-6">
+				<h3>Google Analytics Demo</h3>
+				<ul>
+					<li>This page demostrates how to build basic requirements, which can be tailored to specific client needs.</li>
+					<li>The page is fully functional, and showcases GTM and GA4 network calls, which can be inspected via Chrome Dev Tools > Network Tab > Filter by "www.google-analytics.com"
+					</li>
+				</ul>
+				<p>Please see <a href = "https://dsergio.co/portfolio/site/projects/custom/ga4.html">https://dsergio.co/portfolio/site/projects/custom/ga4.html</a>. Go back to <a href = "https://dsergio.co/portfolio/site/projects/custom/">main portfolios</a>.</p>
+			</div>
+			<div class="col-md-6">
+				<h3>Google Analytics Demo - Generated using AI</h3>
+				<ul>
+					<li>This page shows how a Generative AI tool can be used to quickly create rich documentation, which can be then tailored to specifc client needs.</li>
+					<li>This was generated using Cursor AI.</li>
+				</ul>
+				<p>Please see <a href = "https://dsergio.co/portfolio/site/projects/index.html">https://dsergio.co/portfolio/site/projects/index.html</a>.</p>
+			</div>
+		</div>
+		<hr />
+
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<h3>GA4/GTM Demo Events</h3>
+					<table class="table" id=dataTable>
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">GTM Event</th>
+								<th scope="col">Description</th>
+								<th scope="col">Parameters</th>
+								<th scope="col">Get Info</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class = "requirements">
+								<th scope="row">Pageview</th>
+								<td class = "requirement_name">page_view</td>
+								<td>On load of the page</td>
+								<td>
+									<ul>
+										<li>page_name</li>
+										<li>user_type</li>
+									</ul>
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary get_info">Get Info</button>
+									<button type="button" class="btn btn-success test_event">Test Event</button>
+								</td>
+							</tr>
+							<tr class = "requirements">
+								<th scope="row">Get Info</th>
+								<td class = "requirement_name">get_requirement_info</td>
+								<td>Get information about a requirement</td>
+								<td>
+									<ul>
+										<li>page_name</li>
+										<li>requirement_name</li>
+									</ul>
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary get_info">Get Info</button>
+									<button type="button" class="btn btn-success test_event">Test Event</button>
+								</td>
+							</tr>
+							<tr class = "requirements">
+								<th scope="row">Conversion</th>
+								<td class = "requirement_name">purchase</td>
+								<td>'Purchase' a Requirement</td>
+								<td>
+									<ul>
+										<li>page_name</li>
+										<li>Ecommerce data</li>
+									</ul>
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary get_info">Get Info</button>
+									<button type="button" class="btn btn-success test_event">Test Event</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<h3>GA4/GTM Demo Parameters</h3>
+					<table class="table" id=dimension_table>
+						<thead>
+							<tr>
+								<th scope="col">Dimension Name</th>
+								<th scope="col">Scope</th>
+								<th scope="col">When to set</th>
+								<th scope="col">Possible Values</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class = "parameters">
+								<td>page_name</td>
+								<td>event</td>
+								<td>Pageviews</td>
+								<td>
+									<ul>
+										<li>GA4/GTM Demo</li>
+									</ul>
+								</td>
+							</tr>
+							<tr class = "parameters">
+								<td>user_type</td>
+								<td>user</td>
+								<td>Pageviews</td>
+								<td>
+									<ul>
+										<li>paid</li>
+										<li>new</li>
+									</ul>
+								</td>
+							</tr>
+							<tr class = "parameters">
+								<td>requirement_name</td>
+								<td>event</td>
+								<td>On click of 'Get Requirement Info'</td>
+								<td>
+									<ul>
+										<li>page_name</li>
+										<li>get_requirement_info</li>
+										<li>custom_conversion</li>
+									</ul>
+								</td>
+							</tr>
+							<tr class = "parameters">
+								<td>Ecommmerce Data</td>
+								<td>event</td>
+								<td>On Successful conversion</td>
+								<td>
+									See below
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="row">
+				<div class="col-md-12">
+					<h3 id = "requirement_name"></h3>
+					<pre id = "requirement_json"></pre>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h3>GTM DataLayer Implementation</h3>
+					<p>This section provides guidance on the implementation of the data layer.</p>
+					<h4>Example</h4>
+					<ul>
+						<li>
+							TBD
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h3>QA, Testing, Reporting</h3>
+					<p>This section provides guidance on QA, Testing, and Reporting.</p>
+					<h4>Example</h4>
+					<ul>
+						<li>
+							GA > Reports > Report Name > Verification Steps
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h3>iOS and Android Implementation</h3>
+					<p>This section provides guidance on iOS and Android Implementation.</p>
+					<h4>Example</h4>
+					<ul>
+						<li>
+							TBD
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<hr />
+
+
+		<footer class="footer">
+			<div class="container">
+				GA4/GTM Demo 
+			</div>
+		</footer>
+
+
+
+		<!-- JQuery -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<script type="text/javascript" src = "./javascript.js"></script>
+
+	</body>
+	</html>
