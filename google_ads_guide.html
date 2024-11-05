@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Ads Implementation Guide</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Prism Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    
+    <style>
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        pre code {
+            white-space: pre-wrap;
+        }
+        
+        .table td {
+            vertical-align: middle;
+        }
+        
+        .table td ol {
+            padding-left: 1.2rem;
+        }
+        
+        .table td ol li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .table td ol ul {
+            padding-left: 1.2rem;
+        }
+        
+        .jira-status {
+            min-width: 120px;
+        }
+        
+        .jira-status .badge {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            width: fit-content;
+        }
+        
+        .jira-status .status-details {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .jira-status .status-label {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        /* Update existing container margin */
+        .container.my-5 {
+            margin-top: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Analytics Implementation Hub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="ga4_implementation_guide.html">GA4 Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ios_tracking_guide.html">iOS Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="google_ads_guide.html">Google Ads Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container text-center">
+            <h1 class="display-4 mb-3">Google Ads Implementation Guide</h1>
+            <p class="lead mb-4">Integration guide for Google Ads conversion tracking and remarketing</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="index.html#guides" class="btn btn-light btn-lg">View All Guides</a>
+                <a href="#requirements" class="btn btn-outline-light btn-lg">View Requirements</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5" id="requirements">
+        <h1 class="mb-4">Google Ads Implementation Requirements</h1>
+        
+        <div class="alert alert-warning mb-4">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <strong>Prerequisites:</strong> Ensure GA4 and Google Ads accounts are properly linked in admin settings before implementing these requirements.
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Requirement Name</th>
+                        <th>Description</th>
+                        <th>Implementation Code</th>
+                        <th>Parameters</th>
+                        <th>Google Ads Location</th>
+                        <th>Jira Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Conversion Linking</td>
+                        <td>Link GA4 conversion events to Google Ads</td>
+                        <td>
+                            <pre><code class="language-javascript">// No additional code needed
+// Configure in GA4 Admin:
+// Attribution Settings → 
+// Conversion Events</code></pre>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>Conversion name</li>
+                                <li>Attribution model</li>
+                                <li>Conversion window</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Google Ads → Tools</li>
+                                <li>Measurement → Conversions</li>
+                                <li>Click "Import" → Google Analytics</li>
+                            </ol>
+                        </td>
+                        <td class="jira-status">
+                            <span class="badge bg-success">ADS-101</span>
+                            <div class="status-details">
+                                <span class="status-label">Status:</span> Done
+                                <br>
+                                <span class="status-label">Sprint:</span> Sprint 45
+                                <br>
+                                <a href="#" class="jira-link">View in Jira →</a>
+                            </div>
+                        </td>
+                        <td>Verify conversion actions appear in Google Ads interface</td>
+                    </tr>
+                    <tr>
+                        <td>Enhanced Conversions</td>
+                        <td>Include user-provided data for better conversion matching</td>
+                        <td>
+                            <pre><code class="language-javascript">gtag('set', 'user_data', {
+  'email': 'hash@example.com',
+  'phone_number': '+1234567890',
+  'address': {
+    'first_name': 'John',
+    'last_name': 'Doe',
+    'street': '123 Main St',
+    'city': 'Boston',
+    'region': 'MA',
+    'postal_code': '02110',
+    'country': 'US'
+  }
+});</code></pre>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>email (hashed)</li>
+                                <li>phone_number</li>
+                                <li>address fields</li>
+                                <li>customer data</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Google Ads → Tools</li>
+                                <li>Conversions → Settings</li>
+                                <li>Enhanced conversions</li>
+                            </ol>
+                        </td>
+                        <td class="jira-status">
+                            <span class="badge bg-warning">ADS-102</span>
+                            <div class="status-details">
+                                <span class="status-label">Status:</span> In Progress
+                                <br>
+                                <span class="status-label">Sprint:</span> Sprint 46
+                                <br>
+                                <a href="#" class="jira-link">View in Jira →</a>
+                            </div>
+                        </td>
+                        <td>Ensure PII is properly hashed before sending</td>
+                    </tr>
+                    <tr>
+                        <td>Remarketing Lists</td>
+                        <td>Create audience lists for remarketing campaigns</td>
+                        <td>
+                            <pre><code class="language-javascript">gtag('set', 'user_properties', {
+  'user_type': 'high_value',
+  'purchase_count': '5',
+  'last_purchase_date': '2024-03-15'
+});</code></pre>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>user_properties</li>
+                                <li>custom dimensions</li>
+                                <li>audience rules</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Google Ads → Tools</li>
+                                <li>Audience Manager</li>
+                                <li>Your Data → GA4</li>
+                            </ol>
+                        </td>
+                        <td class="jira-status">
+                            <span class="badge bg-info">ADS-103</span>
+                            <div class="status-details">
+                                <span class="status-label">Status:</span> To Do
+                                <br>
+                                <span class="status-label">Sprint:</span> Sprint 47
+                                <br>
+                                <a href="#" class="jira-link">View in Jira →</a>
+                            </div>
+                        </td>
+                        <td>Allow 24-48 hours for audience lists to populate</td>
+                    </tr>
+                    <tr>
+                        <td>Offline Conversions</td>
+                        <td>Import offline conversion data to Google Ads</td>
+                        <td>
+                            <pre><code class="language-javascript">// Example offline conversion data format
+{
+  "conversionName": "OFFLINE_SALE",
+  "conversionTime": "2024-03-15 10:30:21",
+  "conversionValue": 250.00,
+  "gclid": "ABC123xyz..."
+}</code></pre>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>gclid (required)</li>
+                                <li>conversion_name</li>
+                                <li>conversion_time</li>
+                                <li>conversion_value</li>
+                                <li>currency_code</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Google Ads → Tools</li>
+                                <li>Measurement → Conversions</li>
+                                <li>Upload conversions</li>
+                            </ol>
+                        </td>
+                        <td class="jira-status">
+                            <span class="badge bg-secondary">ADS-104</span>
+                            <div class="status-details">
+                                <span class="status-label">Status:</span> Planned
+                                <br>
+                                <span class="status-label">Sprint:</span> Sprint 48
+                                <br>
+                                <a href="#" class="jira-link">View in Jira →</a>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>Collect GCLID on form submission</li>
+                                <li>Upload within 90 days</li>
+                                <li>Use correct timezone</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Implementation Notes</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Account Setup Requirements</h6>
+                        <ul>
+                            <li>GA4 property must be linked to Google Ads account</li>
+                            <li>Conversion tracking must be enabled</li>
+                            <li>Data sharing settings must be configured</li>
+                            <li>Appropriate user permissions set in both platforms</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Best Practices</h6>
+                        <ul>
+                            <li>Use consistent naming conventions across platforms</li>
+                            <li>Implement enhanced conversions where possible</li>
+                            <li>Regular validation of conversion tracking</li>
+                            <li>Monitor audience list sizes and growth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verification Checklist -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Verification Checklist</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6>Account Linking</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check1">
+                            <label class="form-check-label" for="check1">GA4 linked to Google Ads</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check2">
+                            <label class="form-check-label" for="check2">Data sharing enabled</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Conversion Tracking</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check3">
+                            <label class="form-check-label" for="check3">Conversions imported to Ads</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check4">
+                            <label class="form-check-label" for="check4">Enhanced conversions configured</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Audience Setup</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check5">
+                            <label class="form-check-label" for="check5">Remarketing lists created</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check6">
+                            <label class="form-check-label" for="check6">Audience triggers tested</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Additional Resources</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Documentation</h6>
+                        <ul>
+                            <li><a href="https://support.google.com/google-ads">Google Ads Help Center</a></li>
+                            <li><a href="https://developers.google.com/google-ads">Google Ads API Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Tools</h6>
+                        <ul>
+                            <li><a href="https://ads.google.com/nav/selectaccount">Google Ads Account Access</a></li>
+                            <li><a href="https://support.google.com/tagmanager">Google Tag Manager Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+
+    <!-- Add before closing body tag -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">Analytics Implementation Hub</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Last Updated: March 2024</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

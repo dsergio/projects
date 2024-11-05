@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Ecommerce Store</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXX');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- GA4 Configuration -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Ecommerce Data Layer Setup -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            'ecommerce': {
+                'currencyCode': 'USD'
+            }
+        });
+    </script>
+
+    <style>
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        pre code {
+            white-space: pre-wrap;
+        }
+        
+        .table td {
+            vertical-align: middle;
+        }
+        
+        .table td ol {
+            padding-left: 1.2rem;
+        }
+        
+        .table td ol li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .table td ol ul {
+            padding-left: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Your Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-light me-2">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <button class="btn btn-light position-relative">
+                        <i class="bi bi-cart3"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <!-- Example Product Grid -->
+        <h2 class="mb-4">Featured Products</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Product Card Example -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Name</h5>
+                        <p class="card-text">$99.99</p>
+                        <button class="btn btn-primary" onclick="viewProduct({
+                            id: 'PROD123',
+                            name: 'Product Name',
+                            price: 99.99,
+                            category: 'Category'
+                        })">View Details</button>
+                        <button class="btn btn-success" onclick="addToCart({
+                            id: 'PROD123',
+                            name: 'Product Name',
+                            price: 99.99,
+                            quantity: 1
+                        })">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requirements Documentation -->
+    <div class="container my-5">
+        <h2 class="mb-4">Implementation Requirements</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Requirement Name</th>
+                        <th>Description</th>
+                        <th>Data Layer Code</th>
+                        <th>GA4 Event</th>
+                        <th>Parameters</th>
+                        <th>GA4 Report Location</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Page View</td>
+                        <td>Track when users view any page</td>
+                        <td>
+                            <pre class="mb-0"><code class="language-javascript">dataLayer.push({
+  'event': 'page_view',
+  'page_title': document.title,
+  'page_location': window.location.href,
+  'page_path': window.location.pathname
+});</code></pre>
+                        </td>
+                        <td>page_view</td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>page_title</li>
+                                <li>page_location</li>
+                                <li>page_path</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Reports → Engagement</li>
+                                <li>Pages and screens</li>
+                                <li>Or: Life cycle → Acquisition → Traffic acquisition</li>
+                            </ol>
+                        </td>
+                        <td>Automatically tracked by GA4 base code</td>
+                    </tr>
+                    <tr>
+                        <td>View Item List</td>
+                        <td>Track when users view a list of products</td>
+                        <td>
+                            <pre class="mb-0"><code class="language-javascript">dataLayer.push({
+  'event': 'view_item_list',
+  'ecommerce': {
+    'item_list_id': 'related_products',
+    'item_list_name': 'Related Products',
+    'items': [{
+      'item_id': 'SKU_12345',
+      'item_name': 'Product Name',
+      'price': 19.99,
+      'item_category': 'Category',
+      'index': 1
+    }]
+  }
+});</code></pre>
+                        </td>
+                        <td>view_item_list</td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>item_list_id</li>
+                                <li>item_list_name</li>
+                                <li>items[]</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Reports → Engagement → Monetization</li>
+                                <li>Ecommerce purchases</li>
+                                <li>Click "Shopping behavior" template</li>
+                                <li>View "List views" metric</li>
+                            </ol>
+                        </td>
+                        <td>Fire when product list loads</td>
+                    </tr>
+                    <tr>
+                        <td>Add to Cart</td>
+                        <td>Track when users add items to cart</td>
+                        <td>
+                            <pre class="mb-0"><code class="language-javascript">dataLayer.push({
+  'event': 'add_to_cart',
+  'ecommerce': {
+    'currency': 'USD',
+    'value': 19.99,
+    'items': [{
+      'item_id': 'SKU_12345',
+      'item_name': 'Product Name',
+      'price': 19.99,
+      'quantity': 1
+    }]
+  }
+});</code></pre>
+                        </td>
+                        <td>add_to_cart</td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>currency</li>
+                                <li>value</li>
+                                <li>items[]</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Reports → Engagement → Monetization</li>
+                                <li>Ecommerce purchases</li>
+                                <li>Click "Shopping behavior" template</li>
+                                <li>View "Add to cart" metric</li>
+                                <li>Or: Create custom exploration with add_to_cart event</li>
+                            </ol>
+                        </td>
+                        <td>Fire when item is added to cart</td>
+                    </tr>
+                    <tr>
+                        <td>Purchase</td>
+                        <td>Track when users complete a purchase</td>
+                        <td>
+                            <pre class="mb-0"><code class="language-javascript">dataLayer.push({
+  'event': 'purchase',
+  'ecommerce': {
+    'transaction_id': 'T_12345',
+    'currency': 'USD',
+    'value': 19.99,
+    'tax': 1.99,
+    'shipping': 5.99,
+    'items': [{
+      'item_id': 'SKU_12345',
+      'item_name': 'Product Name',
+      'price': 19.99,
+      'quantity': 1
+    }]
+  }
+});</code></pre>
+                        </td>
+                        <td>purchase</td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>transaction_id</li>
+                                <li>currency</li>
+                                <li>value</li>
+                                <li>tax</li>
+                                <li>shipping</li>
+                                <li>items[]</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>Reports → Engagement → Monetization</li>
+                                <li>Ecommerce purchases</li>
+                                <li>View default purchase metrics</li>
+                                <li>Additional reports:</li>
+                                <ul>
+                                    <li>Monetization Overview</li>
+                                    <li>Total revenue report</li>
+                                    <li>Purchaser demographics</li>
+                                </ul>
+                            </ol>
+                        </td>
+                        <td>Fire only once on order confirmation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add a new section for custom report creation -->
+        <div class="alert alert-info mt-4">
+            <h4 class="alert-heading">Creating Custom Reports</h4>
+            <p class="mb-0">To create custom reports for any of these events:</p>
+            <ol class="mb-0">
+                <li>Navigate to Explore → Create new exploration</li>
+                <li>Select your desired visualization (table, line chart, etc.)</li>
+                <li>In dimensions, add relevant event parameters</li>
+                <li>In metrics, add event count or custom metrics</li>
+                <li>Apply any necessary filters or segments</li>
+            </ol>
+        </div>
+
+        <!-- Add a new card for report shortcuts -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Common GA4 Report Shortcuts</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6>Acquisition Reports</h6>
+                        <ul>
+                            <li>User acquisition</li>
+                            <li>Traffic acquisition</li>
+                            <li>Google Ads report</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Engagement Reports</h6>
+                        <ul>
+                            <li>Events</li>
+                            <li>Conversions</li>
+                            <li>Pages and screens</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Monetization Reports</h6>
+                        <ul>
+                            <li>Ecommerce purchases</li>
+                            <li>In-app purchases</li>
+                            <li>Publisher ads</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="mt-5">
+            <h3>Implementation Notes</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Common Parameters for Items Array</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li>item_id (required)</li>
+                                <li>item_name (required)</li>
+                                <li>price (required)</li>
+                                <li>quantity (required for cart/checkout/purchase)</li>
+                                <li>item_brand (recommended)</li>
+                                <li>item_category (recommended)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Best Practices</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li>Clear ecommerce object before pushing new data</li>
+                                <li>Use consistent currency codes</li>
+                                <li>Include all recommended parameters</li>
+                                <li>Test in GA4 DebugView</li>
+                                <li>Validate in GTM Preview mode</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Your trusted online store for quality products.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-light">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="fs-4">
+                        <i class="bi bi-facebook me-2"></i>
+                        <i class="bi bi-twitter me-2"></i>
+                        <i class="bi bi-instagram me-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ecommerce Tracking Scripts -->
+    <script>
+        function viewProduct(productData) {
+            dataLayer.push({ ecommerce: null });
+            dataLayer.push({
+                'event': 'view_item',
+                'ecommerce': {
+                    'items': [{
+                        'item_id': productData.id,
+                        'item_name': productData.name,
+                        'price': productData.price,
+                        'currency': 'USD',
+                        'item_category': productData.category
+                    }]
+                }
+            });
+        }
+
+        function addToCart(productData) {
+            dataLayer.push({ ecommerce: null });
+            dataLayer.push({
+                'event': 'add_to_cart',
+                'ecommerce': {
+                    'items': [{
+                        'item_id': productData.id,
+                        'item_name': productData.name,
+                        'price': productData.price,
+                        'currency': 'USD',
+                        'quantity': productData.quantity
+                    }]
+                }
+            });
+        }
+
+        function purchaseComplete(orderData) {
+            dataLayer.push({ ecommerce: null });
+            dataLayer.push({
+                'event': 'purchase',
+                'ecommerce': {
+                    'transaction_id': orderData.transactionId,
+                    'value': orderData.total,
+                    'tax': orderData.tax,
+                    'shipping': orderData.shipping,
+                    'currency': 'USD',
+                    'items': orderData.items
+                }
+            });
+        }
+    </script>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

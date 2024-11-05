@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guide for migrating from client-side to server-side Google Tag Manager">
+    <meta name="author" content="Analytics Implementation Team">
+    <title>Server-Side GTM Migration Guide - Analytics Implementation Hub</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Prism Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    
+    <style>
+        /* [Previous styles remain the same] */
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Analytics Implementation Hub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="ga4_implementation_guide.html">GA4 Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ios_tracking_guide.html">iOS Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="google_ads_guide.html">Google Ads Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="google_cdp_guide.html">CDP Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="server_side_gtm_guide.html">sGTM Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container text-center">
+            <h1 class="display-4 mb-3">Server-Side GTM Migration Guide</h1>
+            <p class="lead mb-4">Complete guide for migrating from client-side to server-side Google Tag Manager</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="index.html#guides" class="btn btn-light btn-lg">View All Guides</a>
+                <a href="#requirements" class="btn btn-outline-light btn-lg">View Requirements</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5" id="requirements">
+        <div class="alert alert-warning mb-4">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <strong>Prerequisites:</strong>
+            <ul class="mb-0 mt-2">
+                <li>Existing client-side GTM implementation</li>
+                <li>Google Cloud Platform project configured</li>
+                <li>Server-side GTM container created</li>
+                <li>Custom domain for sGTM endpoint (recommended)</li>
+            </ul>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Migration Step</th>
+                        <th>Description</th>
+                        <th>Implementation Code</th>
+                        <th>Configuration</th>
+                        <th>Location</th>
+                        <th>Jira Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Setup sGTM Container</td>
+                        <td>Configure server container and client</td>
+                        <td>
+                            <pre><code class="language-javascript">// Update GTM snippet
+(function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://your-sgtm-domain.com/'+i+'.js'+dl;
+    f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXX');</code></pre>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>Container ID</li>
+                                <li>Custom domain</li>
+                                <li>Preview header</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>GCP → Cloud Run</li>
+                                <li>GTM → Admin</li>
+                                <li>Container Settings</li>
+                            </ol>
+                        </td>
+                        <td class="jira-status">
+                            <span class="badge bg-success">SGTM-101</span>
+                            <div class="status-details">
+                                <span class="status-label">Status:</span> Done
+                                <br>
+                                <span class="status-label">Sprint:</span> Sprint 45
+                                <br>
+                                <a href="#" class="jira-link">View in Jira →</a>
+                            </div>
+                        </td>
+                        <td>Verify domain configuration before deployment</td>
+                    </tr>
+                    <tr>
+                        <td>Client Configuration</td>
+                        <td>Setup client for data transmission</td>
+                        <td>
+                            <pre><code class="language-javascript">// Client configuration
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  'client_id': 'GA4_CLIENT_ID',
+  'event_time': Date.now(),
+  'event': 'page_view',
+  'page_location': window.location.href,
+  'transport_url': 'https://your-sgtm-domain.com'
+});</code></pre>
+                        </td>
+                        <td>
+                            <ul class="mb-0">
+                                <li>Client name</li>
+                                <li>Client type</li>
+                                <li>Fields to set</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol class="mb-0">
+                                <li>sGTM → Clients</li>
+                                <li>Client Setup</li>
+                            </ol>
+                        </td>
+                        <td class="jira-status">
+                            <span class="badge bg-warning">SGTM-102</span>
+                            <div class="status-details">
+                                <span class="status-label">Status:</span> In Progress
+                                <br>
+                                <span class="status-label">Sprint:</span> Sprint 46
+                                <br>
+                                <a href="#" class="jira-link">View in Jira →</a>
+                            </div>
+                        </td>
+                        <td>Test in preview mode before publishing</td>
+                    </tr>
+                    <!-- Add more migration steps as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Migration Phases -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Migration Phases</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h6>Phase 1: Setup</h6>
+                        <ul>
+                            <li>Create GCP project</li>
+                            <li>Configure sGTM container</li>
+                            <li>Set up custom domain</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Phase 2: Configuration</h6>
+                        <ul>
+                            <li>Create clients</li>
+                            <li>Set up tags</li>
+                            <li>Configure variables</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Phase 3: Testing</h6>
+                        <ul>
+                            <li>Preview mode testing</li>
+                            <li>Debug events</li>
+                            <li>Validate tracking</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Phase 4: Migration</h6>
+                        <ul>
+                            <li>Gradual rollout</li>
+                            <li>Monitor performance</li>
+                            <li>Validate data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Implementation Notes</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Key Considerations</h6>
+                        <ul>
+                            <li>Performance impact</li>
+                            <li>Data privacy compliance</li>
+                            <li>Cost considerations</li>
+                            <li>Scalability requirements</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Best Practices</h6>
+                        <ul>
+                            <li>Use staged migration approach</li>
+                            <li>Implement proper error handling</li>
+                            <li>Monitor server costs</li>
+                            <li>Regular backup of configurations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verification Checklist -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Migration Checklist</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6>Infrastructure</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check1">
+                            <label class="form-check-label" for="check1">GCP project setup</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check2">
+                            <label class="form-check-label" for="check2">Custom domain configured</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Configuration</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check3">
+                            <label class="form-check-label" for="check3">Clients created</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check4">
+                            <label class="form-check-label" for="check4">Tags migrated</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Validation</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check5">
+                            <label class="form-check-label" for="check5">Preview testing complete</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="check6">
+                            <label class="form-check-label" for="check6">Data validation complete</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">Analytics Implementation Hub</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Last Updated: March 2024</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+</body>
+</html> 
