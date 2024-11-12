@@ -36,6 +36,8 @@
 
 		var output_text = "dataLayer.push(";
 		output_text += JSON.stringify(output, undefined, 2);
+		output_text += ");"
+		
 		output_text += "\n\ndataLayer = ";
 		output_text += JSON.stringify(dataLayer, undefined, 2);
 		output_text += ");"
