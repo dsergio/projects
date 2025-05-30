@@ -28,3 +28,4 @@ jobs:
           app_location: "./" # Path to your HTML files
           api_location: "" # No API
           output_location: "." # No build output directory
+          github_id_token: ${{ steps.idtoken.outputs.result }}
