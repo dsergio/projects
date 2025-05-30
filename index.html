@@ -1,467 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Implementation Guides</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    
-    <style>
-        .hero {
-            background: linear-gradient(135deg, #4285f4, #34a853);
-            color: white;
-            padding: 4rem 0;
-        }
-
-        .guide-card {
-            transition: transform 0.2s, box-shadow 0.2s;
-            height: 100%;
-        }
-
-        .guide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .platform-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
-
-        .last-updated {
-            font-size: 0.85rem;
-            color: #6c757d;
-        }
-
-        .footer {
-            background: #f8f9fa;
-            padding: 2rem 0;
-            margin-top: 4rem;
-        }
-
-        @media (min-width: 992px) {
-            .col-lg-4 {
-                flex: 0 0 auto;
-                width: 33.33333%;
-            }
-        }
-
-        .quick-action-icon {
-            font-size: 2rem;
-            color: #4285f4;
-        }
-        
-        .platform-icon {
-            font-size: 2rem;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background-color: #f8f9fa;
-        }
-        
-        .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .progress {
-            border-radius: 1rem;
-            background-color: #e9ecef;
-        }
-
-        .progress-bar {
-            border-radius: 1rem;
-        }
-
-        .list-group-item-action:hover {
-            background-color: #f8f9fa;
-        }
-    </style>
+	<title>Portfolio - David Sergio</title>
+	<link rel = "stylesheet" type = "text/css" href = "./styles.css" />
+	
+	<!-- Bootstrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CPG3W06E0T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CPG3W06E0T');
+</script>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Analytics Implementation Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://dsergio.co/portfolio/site/projects/custom">David Sergio Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#guides">Implementation Guides</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="requirements_gathering.html">Requirements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="analytics_audit.html">Audit</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#resources">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="container text-center">
-            <h1 class="display-4 mb-3">Analytics Implementation Guides</h1>
-            <p class="lead mb-4">Comprehensive documentation for implementing analytics across web and mobile platforms</p>
-            <div class="d-flex justify-content-center gap-3">
-                <a href="#guides" class="btn btn-light btn-lg">View Guides</a>
-                <a href="#resources" class="btn btn-outline-light btn-lg">Resources</a>
-            </div>
-        </div>
-    </div>
 
-    <!-- Quick Actions Section -->
-    <div class="container my-5">
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="platform-icon">
-                                <i class="bi bi-list-check text-primary"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h5 class="card-title mb-1">Requirements</h5>
-                                <p class="card-text text-muted">Track implementation needs</p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <a href="requirements_gathering.html" class="btn btn-primary">
-                                View Requirements
-                            </a>
-                            <a href="requirements_gathering.html#addRequirementModal" class="btn btn-outline-primary">
-                                <i class="bi bi-plus-circle me-1"></i>Add New
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="platform-icon">
-                                <i class="bi bi-clipboard-check text-success"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h5 class="card-title mb-1">Implementation Audit</h5>
-                                <p class="card-text text-muted">Monitor tracking health</p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <a href="analytics_audit.html" class="btn btn-primary">
-                                View Audit
-                            </a>
-                            <a href="analytics_audit.html#audit-table" class="btn btn-outline-primary">
-                                <i class="bi bi-graph-up me-1"></i>Metrics
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="platform-icon">
-                                <i class="bi bi-book text-primary"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h5 class="card-title mb-1">Implementation Guides</h5>
-                                <p class="card-text text-muted">Access documentation</p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <a href="#guides" class="btn btn-primary">
-                                Browse Guides
-                            </a>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#guideSearchModal">
-                                <i class="bi bi-search me-1"></i>Search
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="jumbotron">
+		<h1 class="display-3"><a href = "https://dsergio.co/portfolio/site/projects/custom/">Portfolio - David Sergio</a></h1>
+		
+		<hr class="my-4">
+		<p class="lead">About</p>
+		<img src="https://dsergio.co/portfolio/site/images/davidsergio_propic1_small.jpg" class="img-thumbnail" alt="David Sergio" style = "width:150px">
+		<br /><br />
+		<p>
+		<a href = "https://dsergio.co/portfolio/site/ResumeDavidSergio_20241101.pdf">Resume</a>
+		</p>
 
-    <!-- Add Implementation Overview section -->
-    <div class="container mb-5">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h2>Implementation Overview</h2>
-                <div class="progress mb-3" style="height: 10px;">
-                    <div class="progress-bar bg-success" style="width: 85%;" title="Implementation Score"></div>
-                </div>
-                <div class="d-flex justify-content-between text-muted">
-                    <span>Requirements</span>
-                    <span>Audit</span>
-                    <span>Guides</span>
-                </div>
-            </div>
-        </div>
-    </div>
+	</div>
 
-    <!-- Implementation Guides Section -->
-    <div class="container my-5" id="guides">
-        <h2 class="text-center mb-4">Platform Implementation Guides</h2>
-        <div class="row g-4">
-            <!-- Web Implementation Guide -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card guide-card">
-                    <div class="card-body">
-                        <span class="badge bg-success status-badge">Latest Version</span>
-                        <div class="text-center platform-icon">
-                            <i class="bi bi-globe"></i>
-                        </div>
-                        <h5 class="card-title text-center mb-3">Web Implementation</h5>
-                        <p class="card-text">GA4 and GTM implementation guide for web applications, including ecommerce tracking requirements.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Ecommerce Events</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Google Tag Manager</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Enhanced Conversions</li>
-                        </ul>
-                        <div class="d-grid">
-                            <a href="ga4_implementation_guide.html" class="btn btn-primary">View Guide</a>
-                        </div>
-                        <p class="last-updated mt-3 mb-0">Last updated: November 4, 2024</p>
-                    </div>
-                </div>
-            </div>
+	<div class="container-fluid">
 
-            <!-- iOS Implementation Guide -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card guide-card">
-                    <div class="card-body">
-                        <span class="badge bg-success status-badge">Latest Version</span>
-                        <div class="text-center platform-icon">
-                            <i class="bi bi-apple"></i>
-                        </div>
-                        <h5 class="card-title text-center mb-3">iOS Implementation</h5>
-                        <p class="card-text">Firebase Analytics implementation guide for iOS applications with Swift code examples.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Firebase Integration</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>App Privacy</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Event Tracking</li>
-                        </ul>
-                        <div class="d-grid">
-                            <a href="ios_tracking_guide.html" class="btn btn-primary">View Guide</a>
-                        </div>
-                        <p class="last-updated mt-3 mb-0">Last updated: November 14, 2024</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Google Ads Guide -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card guide-card">
-                    <div class="card-body">
-                        <span class="badge bg-success status-badge">Latest Version</span>
-                        <div class="text-center platform-icon">
-                            <i class="bi bi-badge-ad"></i>
-                        </div>
-                        <h5 class="card-title text-center mb-3">Google Ads Integration</h5>
-                        <p class="card-text">Google Ads conversion tracking and remarketing implementation guide.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Conversion Tracking</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Remarketing Lists</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Enhanced Conversions</li>
-                        </ul>
-                        <div class="d-grid">
-                            <a href="google_ads_guide.html" class="btn btn-primary">View Guide</a>
-                        </div>
-                        <p class="last-updated mt-3 mb-0">Last updated: November 13, 2024</p>
-                    </div>
-                </div>
-            </div>
+		<div class="container-fluid">
 
-            <!-- NEW: CDP Guide -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card guide-card">
-                    <div class="card-body">
-                        <span class="badge bg-info status-badge">New</span>
-                        <div class="text-center platform-icon">
-                            <i class="bi bi-database"></i>
-                        </div>
-                        <h5 class="card-title text-center mb-3">CDP Integration</h5>
-                        <p class="card-text">Google Cloud Platform Customer Data Platform implementation guide.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>User Profiles</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Audience Segments</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Data Integration</li>
-                        </ul>
-                        <div class="d-grid">
-                            <a href="google_cdp_guide.html" class="btn btn-primary">View Guide</a>
-                        </div>
-                        <p class="last-updated mt-3 mb-0">Last updated: November 16, 2024</p>
-                    </div>
-                </div>
-            </div>
+			<div class="row">
+			<div class="col-md-6">
+				<h3>Google Analytics Demo</h3>
+				<ul>
+					<li>This page demostrates how to build basic requirements, which can be tailored to specific client needs.</li>
+					<li>The page is fully functional, and showcases GTM and GA4 network calls, which can be inspected via Chrome Dev Tools > Network Tab > Filter by "www.google-analytics.com"
+					</li>
+				</ul>
+				<p>Please see <a href = "https://dsergio.co/portfolio/site/projects/custom/ga4.html">https://dsergio.co/portfolio/site/projects/custom/ga4.html</a>. Go back to <a href = "https://dsergio.co/portfolio/site/projects/custom/">main portfolios</a>.</p>
+			</div>
+			<div class="col-md-6">
+				<h3>Google Analytics Demo - Generated using AI</h3>
+				<ul>
+					<li>This page shows how a Generative AI tool can be used to quickly create rich documentation, which can be then tailored to specifc client needs.</li>
+					<li>This was generated using Cursor AI.</li>
+				</ul>
+				<p>Please see <a href = "https://dsergio.co/portfolio/site/projects/index.html">https://dsergio.co/portfolio/site/projects/index.html</a>.</p>
+			</div>
+		</div>
+		<hr />
 
-            <!-- NEW: Server-Side GTM Guide -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card guide-card">
-                    <div class="card-body">
-                        <span class="badge bg-info status-badge">New</span>
-                        <div class="text-center platform-icon">
-                            <i class="bi bi-server"></i>
-                        </div>
-                        <h5 class="card-title text-center mb-3">Server-Side GTM</h5>
-                        <p class="card-text">Complete guide for migrating from client-side to server-side Google Tag Manager implementation.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Migration Steps</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Server Configuration</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Best Practices</li>
-                        </ul>
-                        <div class="d-grid">
-                            <a href="server_side_gtm_guide.html" class="btn btn-primary">View Guide</a>
-                        </div>
-                        <p class="last-updated mt-3 mb-0">Last updated: November 16, 2024</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="row">
+			<div class="col-md-6">
 
-    <!-- Resources Section -->
-    <div class="container my-5" id="resources">
-        <h2 class="text-center mb-4">Additional Resources</h2>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-book me-2"></i>Documentation</h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-2">
-                                <a href="https://developers.google.com/analytics" class="text-decoration-none">
-                                    <i class="bi bi-link-45deg me-2"></i>Google Analytics Documentation
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="https://firebase.google.com/docs/analytics" class="text-decoration-none">
-                                    <i class="bi bi-link-45deg me-2"></i>Firebase Analytics Documentation
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="https://support.google.com/google-ads" class="text-decoration-none">
-                                    <i class="bi bi-link-45deg me-2"></i>Google Ads Help Center
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-tools me-2"></i>Tools</h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-2">
-                                <a href="https://tagassistant.google.com/" class="text-decoration-none">
-                                    <i class="bi bi-link-45deg me-2"></i>Tag Assistant
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="https://analytics.google.com/analytics/web/#/debug/overview" class="text-decoration-none">
-                                    <i class="bi bi-link-45deg me-2"></i>GA4 DebugView
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="https://developers.google.com/tag-platform/devtools" class="text-decoration-none">
-                                    <i class="bi bi-link-45deg me-2"></i>Google Tag Manager Preview
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<h3>N-Dimensional R-Tree in Java with Configurable Storage and Configurable Split Algorithms</h3>
+				<p>An R-Tree is a data structure used primarily for spatial data, such as latitude and longitude, grouped in a minimum bounding rectangle. The structure allows for fast O(log<sub>M</sub>n) querying by boundaries. For example, one might want to query all landmarks on a map that fall within a geographical region. This structure is designed for such queries.</p>
 
-    <!-- Contact Section -->
-    <div class="container my-5" id="contact">
-        <div class="card">
-            <div class="card-body text-center">
-                <h5 class="card-title">Need Help?</h5>
-                <p class="card-text">Contact the Analytics Implementation Team for support</p>
-                <a href="mailto:analytics-team@example.com" class="btn btn-primary">
-                    <i class="bi bi-envelope me-2"></i>Contact Us
-                </a>
-            </div>
-        </div>
-    </div>
+				<!-- <h4>Web app<h5><a href = "https://dsergio-rtree-app.azurewebsites.net/RTree/">https://dsergio-rtree-app.azurewebsites.net/RTree/</a></h5></h4> -->
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Analytics Implementation Portfolio</h5>
-                    <p class="mb-0">A comprehensive guide to implementing analytics across platforms</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-0">Last Updated: November 4, 2024</p>
-                </div>
-            </div>
-        </div>
+				<h4>Project Description</h4>
+				<ul>
+					<li>
+						<p>N-Dimensional R-Tree structure which can store spatial data in an R-Tree structure with configurable storage (object-relational mapping), such as Amazon AWS DynamoDB, MySQL, Sqlite, In-Memory, etc., using Java.</p>
+					</li>
+
+					<li><p>The split algorithm as well as the storage type can be configured. New algorithms and storage types can be easily added. </p></li>
+					<li><p>The data structure uses generics for data type configuration (int, double, nominal, etc). For example, this structure could be used to calculate clusters of sets of categorical data. Imagine a "grid" of categories of movies. Movies are categorized by "Quality" and "Rewatchability" with possible values such as "bad" or "excellent". These nominal attributes can be structured in a "rectangle", so a movie that is "excellent" quality and "excellent" rewatchability is paged with other similar movies. 
+					</p></li>
+					<li><p>REST API using Spring Boot, Generics and additional types with compareTo and distanceTo methods, .NET Core Web App using three.js, VueJS. 
+					</p></li>
+
+					<li><p>This project uses Maven for build and project dependencies, such as JSON, JDBC and AWS DynamoDB.</p></li>
+
+					<li>
+						<p>Properties of RTree:
+						<ul> 
+							<li>Depth-balanced</li>
+							<li>Max number of children, and max number of leaf node Items</li>
+							<li>Each branch node contains a rectangle and a set of children nodes</li>
+							<li>Each leaf node contains a rectangle and a set of point data.</li>
+							<li>Split Algorithm: The split algorithm determines how to split up the overflow of items or children when a node exceeds the max, which occurs recursively from the leaf node up to the root if required. This implementation uses quadradic split. The quadradic split in the leaf node calculates the worst combination of two items (largest combined rectangle). These two items are the seeds, and the other items are distributed to either of the two seeds in a way that minimizes the enlargement area. There are other flavors of split algorithms that could be explored in order to optimize performance.</li>
+						</ul>
+						</p>
+					</li>
+					<li>
+						<p>Github Repository: <a href = "https://github.com/dsergio/rtree-java">https://github.com/dsergio/rtree-java</a></p>
+					</li>
+					<li>
+						<p>2019 Report: <a href = "https://dsergio.co/portfolio/site/RTree_Report.pdf">RTree_Report.pdf</a></p>
+					</li>
+					<li>
+						<p>UML: <a href = "https://dsergio.co/portfolio/site/rtreeUML.pdf">rtreeUML.pdf</a></p>
+					</li>
+				</ul>
+
+				pom.xml:
+<xmp><!-- https://pkgs.dev.azure.com/dsergio/rtree-java/_packaging/rtree-java-feed/maven/v1 -->
+<dependency>
+  <groupId>dsergio</groupId>
+  <artifactId>rtree</artifactId>
+  <version>1.0.2</version>
+</dependency>
+</xmp>
+
+				
+				<img src = "https://dsergio.co/portfolio/site/images/worldcities_50k.png" width=500/>
+				<br />
+				<i>A large (50k) 2D dataset of World Cities. This structure uses Double latitude and longitude data types.</i>
+				<br /><br />
+				<img src = "https://dsergio.co/portfolio/site/images/rtree_example_uscitiesN5000.png" width=500 />
+				<br />
+				<i>A large (5k) 2D dataset of US Cities. The colors are rainbow-sorted by depth</i>
+				<br /><br />
+				<img src = "https://dsergio.co/portfolio/site/images/rtree_3d.png" />
+				<br />
+				<i>A small 3D dataset rendered using Three.js</i>
+				<br /><br />
+				
+			</div>
+			<div class="col-md-6">
+				<img src = "https://dsergio.co/portfolio/site/images/rtree_3d_2.png" />
+				<br />
+				<i>A small 3D dataset without diagonals rendered using Three.js</i>
+				<br /><br />
+				<img src = "https://dsergio.co/portfolio/site/images/rtree_webapp_screenshot2.png" />
+				<br />
+				<i>Screenshot of web app. See <a href="https://dsergio-rtree-app.azurewebsites.net/RTree">https://dsergio-rtree-app.azurewebsites.net/RTree</a></i>
+				<br /><br />
+				
+				<br /><br />
+				<img src = "https://dsergio.co/portfolio/site/images/CSCD467_FinalProject_Diagrams.png" />
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-6">
+				<h3>ASP.NET Core Web Application Programming with Azure CI/CD</h3>
+				<p>Web application using 
+					<ul>
+						<li>.NET Core 3.1</li>
+						<li>C#</li>
+						<li>VueJS</li>
+						<li>Typescript</li>
+						<li>Unit Testing, automated Selenium testing, and Test-driven development</li>
+						<li>Azure Dev Ops and CI/CD</li>
+						<li>Code: <a href = "https://github.com/dsergio/EWU-CSCD379-2020-Winter/tree/Assignment10">https://github.com/dsergio/EWU-CSCD379-2020-Winter/tree/Assignment10</a></li>
+					</ul>
+				</p>
+					
+				<img src = "https://dsergio.co/portfolio/site/images/aspnet_screenshot.png" />
+				<img src = "https://dsergio.co/portfolio/site/images/screenshot_azure_release_pipeline.png" />
+				<img src = "https://dsergio.co/portfolio/site/images/seleniums_screenshot.png" />
+			</div>
+
+			<div class="col-md-6">
+				<h3>Cloud Binary Search Tree (BST) in AWS with caching</h3>
+				<ul>
+					<li>Cloud-based Binary Search Tree structure in Amazon AWS DynamoDB, using Java.</li>
+					<li>Code: <a href = "https://github.com/dsergio/bst">https://github.com/dsergio/bst</a></li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/bst.png" />
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Cloud-based indoor navigation app, using AWS.</h3>
+				<ul>
+					<li>This is a navigation app project inspired by the need for people to navigate confusing indoor spaces, such as convention centers or hospitals. 
+					</li>
+					<li>AWS Services used: Lambda, API Gateway, RDS, DynamoDB, Cognito for authentication</li>
+					<li>This is a team project.</li>
+					<li> This project includes a serverless RESTful API and backend Graph data structure with an implementation of Dijkstra's shortest-path alogirithm, a ReactJS front-end, and a native Android front-end application.</li>
+					<li>Code: <a href = "https://github.com/javanada">https://github.com/javanada</a></li>
+					<li>Report: <a href = "./INavReport.pdf">INavReport.pdf</a>
+					</li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/i_nav_demo.png" />
+				<img src = "https://dsergio.co/portfolio/site/images/i_nav_api.png" />
+			</div>
+			<div class="col-md-6">
+				<h3>Hadoop Map Reduce using AWS EMR</h3>
+				<ul>
+					<li>AWS EMR
+					</li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/mapreduce.png" />
+				<img src = "https://dsergio.co/portfolio/site/images/aws_emr_config.png" />
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-6">
+				<h3>.NET WPF App</h3>
+				<ul>
+					<li>.NET WPF App
+					</li>
+					<li>Code: <a href = "https://github.com/dsergio/EWU-CSCD371-2019-Fall/tree/HW9_Solution">https://github.com/dsergio/EWU-CSCD371-2019-Fall/tree/HW9_Solution</a>
+					</li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/wpf_app.png" />
+			</div>
+			<div class="col-md-6">
+				<h3>Multi-threaded Web Server</h3>
+				<ul>
+					<li>Distributed Web Services, Thread Pool and Management on Server, Parallel Client Query.
+					</li>
+					<li>
+						Code: <a href = "https://github.com/dsergio/server">https://github.com/dsergio/server</a>
+					</li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/HW45_UML.png" />
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-6">
+
+				<h3>Data Mining - KMeans Clustering Application - Java and R</h3>
+				<ul>
+					<li>KMeans Clustering Application - Java and R
+					</li>
+					<li>
+						Code: <a href = "https://github.com/dsergio/CS429-HW4">https://github.com/dsergio/CS429-HW4</a>
+					</li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/Chart_Cluster3.png" />
+				<img src = "https://dsergio.co/portfolio/site/images/Chart_Cluster5.png" />
+			</div>
+			<div class="col-md-6">
+				<h3>Classification Data Modeling Project: Avalanche-Weather Prediction Models in Colorado</h3>
+				<ul>
+					<li>Avalanche-Weather Prediction Models in Colorado.
+					</li>
+					<li>
+						Team Report: <a href = "https://dsergio.co/portfolio/site/ClassificationModelReport.pdf">ClassificationModelReport.pdf</a>
+					</li>
+					<li>
+						Project Extension: <a href = "https://github.com/dsergio/data-modeling">https://github.com/dsergio/data-modeling</a>
+					</li>
+				</ul>
+				<img src = "https://dsergio.co/portfolio/site/images/classification_training_data.png" />
+				<img src = "https://raw.githubusercontent.com/dsergio/data-modeling/master/python/plots/kmeansTempRH.png" />
+				<br /><br /><br />
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="footer">
+      <div class="container">
+      	David Sergio 2024 | <a href = "https://www.linkedin.com/in/davidsergio/">LinkedIn</a> | <a href = "https://dsergio.co/portfolio/site/ResumeDavidSergio_20241101.pdf">Resume</a></span>
+      </div>
     </footer>
 
-    <!-- Optional: Add a search modal -->
-    <div class="modal fade" id="guideSearchModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Search Implementation Guides</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="search" class="form-control form-control-lg" placeholder="Search guides...">
-                    <div class="mt-3">
-                        <h6>Popular Searches:</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <a href="ga4_implementation_guide.html" class="badge bg-light text-dark text-decoration-none">GA4 Setup</a>
-                            <a href="server_side_gtm_guide.html" class="badge bg-light text-dark text-decoration-none">Server GTM</a>
-                            <a href="google_ads_guide.html" class="badge bg-light text-dark text-decoration-none">Conversions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src = "./javascript.js"></script>
+
 </body>
 </html>
